@@ -12,9 +12,30 @@ $consonnes = "bcdfghjklmnpqrstvwxyzBCDFGHJKLMNPQRSTVWXYZ";
 
 for ($i = 0; isset($str[$i]); $i++) {
     $char = $str[$i];
-    if (strpos($voyelles, $char) !== false) {
+    
+   
+    $isVoyelle = false;
+    for ($j = 0; isset($voyelles[$j]); $j++) {
+        if ($char == $voyelles[$j]) {
+            $isVoyelle = true;
+            break;
+        }
+    }
+ 
+    $isConsonne = false;
+    for ($j = 0; isset($consonnes[$j]); $j++) {
+        if ($char == $consonnes[$j]) {
+            $isConsonne = true;
+            break;
+        }
+    }
+    
+  
+    if ($isVoyelle) {
         $dic["voyelles"]++;
-    } elseif (strpos($consonnes, $char) !== false) {
+    }
+   
+    elseif ($isConsonne) {
         $dic["consonnes"]++;
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
 $str = "I'm sorry Dave I'm afraid I can't do that";
-$long = strlen($str);
 
-
-for($i = 0 ; $i < $long ; $i ++){
+$i = 0;
+while (isset($str[$i])) {
     $voyelle = strtolower($str[$i]);
-    if ($voyelle == 'a' || $voyelle == 'e' || $voyelle == 'i' ||$voyelle == 'o' || $voyelle == 'u'){
+    if ($voyelle == 'a' || $voyelle == 'e' || $voyelle == 'i' || $voyelle == 'o' || $voyelle == 'u') {
         echo $str[$i];
     }
-    }
+    $i++;
+}

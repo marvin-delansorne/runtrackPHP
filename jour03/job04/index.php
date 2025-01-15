@@ -1,5 +1,10 @@
 <?php
 
-$str = "Dans l'espace, personne ne vous entend crirer";
-$nmbredecarac = strlen($str) ;
-echo "nombre de caractères : $nmbredecarac" ;
+$str = "Dans l'espace, personne ne vous entend crier";
+$i = 0;
+
+while (isset($str[$i])) {
+    $i++;
+}
+
+echo "nombre de caractères : $i";
