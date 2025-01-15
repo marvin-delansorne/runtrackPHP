@@ -1,13 +1,19 @@
 <?php
 
 $str = "Les choses que l on Possede finissent par nous posseder.";
-
 $reversedStr = "";
+$i = 0;
 
-for ($i = strlen($str) - 1; $i >= 0; $i--) {
-    $reversedStr .= $str[$i];
+
+while (isset($str[$i])) {
+    $i++;
 }
 
+$i--; 
+while ($i >= 0) {
+    $reversedStr .= $str[$i];
+    $i--;
+}
 
 echo $reversedStr;
 ?>
