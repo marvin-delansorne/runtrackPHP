@@ -7,5 +7,3 @@ $longueur = strlen($str) ;
 for ($i = 0 ; $i < $longueur; $i += 2) { 
     echo $str[$i] ;
 }
-
-echo $str[5];
