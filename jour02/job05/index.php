@@ -1,18 +1,12 @@
 <?php
-
 for ($i = 2; $i <= 1000; $i++) {
-    $estPremier = true;
     for ($j = 2; $j < $i; $j++) {
         if ($i % $j == 0) {
-            $estPremier = false;
-            break;
+            continue 2; // Passe au prochain $i si $i n'est pas premier
         }
     }
-    if ($estPremier) {
-        echo $i . "<br>";
-    }
+    echo $i . "<br>";
 }
-
-
+?>
   
  
