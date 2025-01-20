@@ -1,5 +1,5 @@
 <?php
-// Vérification de la soumission du formulaire
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Récupération des valeurs POST
     $username = isset($_POST['username']) ? $_POST['username'] : '';

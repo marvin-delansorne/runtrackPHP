@@ -3,36 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test GET</title>
+    <title> Arguments pour test $_GET</title>
 </head>
 <body>
-    <h2>Formulaire de test pour la méthode GET</h2>
-    <form action="page.php" method="GET">
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom"><br>
+    <h1>Formulaire $_GET</h1>
 
-        <label for="age">Âge :</label>
-        <input type="text" id="age" name="age"><br>
+   
+    <form method="GET" action="">
+        <label for="argument1">Argument 1 :</label>
+        <input type="text" id="argument1" name="argument1"><br><br>
 
-        <label for="ville">Ville :</label>
-        <input type="text" id="ville" name="ville"><br>
+        <label for="argument2">Argument 2 :</label>
+        <input type="text" id="argument2" name="argument2"><br><br>
 
-        <button type="submit">Envoyer</button>
+        <label for="argument3">Argument 3 :</label>
+        <input type="text" id="argument3" name="argument3"><br><br>
+
+        <button type="Envoyer">Envoyer</button>
     </form>
+
+    <h2>Résultat</h2>
+    <?php
+    
+
+    if (isset($_GET)) {
+
+        $nombreArguments = 0;
+        foreach ($_GET as $key => $value) {
+            $nombreArguments++;
+        }
+
+  
+        if ($nombreArguments > 0) {
+            echo "Nombre d'arguments passés via \$_GET : " . $nombreArguments . "<br>";
+
+            echo "<pre>";
+            foreach ($_GET as $key => $value) {
+                echo($key) . " : " . ($value) . "\n";
+            }
+            echo "</pre>";
+        } else {
+            echo "Aucun argument n'a été passé via \$_GET.";
+        }
+    } else {
+        echo "Aucun argument n'a été passé via \$_GET.";
+    }
+    ?>
 </body>
 </html>
-
-<?php
-
-$compteur = 0;
-
-
-foreach ($_GET as $key => $value) {
-   
-    if (isset($key) && isset($value)) {
-        $compteur++;  
-    }
-}
- 
-echo "Le nombre d'arguments passés dans l'URL est : $compteur";
-?>

@@ -1,47 +1,53 @@
-<?php
-
-if (!empty($_POST)) {
-   
-    echo "<table border='1'>";
-    echo "<tr><th>Argument</th><th>Valeur</th></tr>";
-    
-   
-    foreach ($_POST as $key => $value) {
-       
-        if (isset($key) && isset($value)) {
-            
-            echo "<tr><td>" . htmlspecialchars($key) . "</td><td>" . htmlspecialchars($value) . "</td></tr>";
-        }
-    }
-    
-
-    echo "</table>";
-} else {
-    echo "Aucun argument POST trouvé.";
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire POST</title>
+    <title>Affichage des données POST</title>
 </head>
 <body>
-    <h1>Formulaire d'exemple (POST)</h1>
-    <form action="votre-script.php" method="POST">
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom"><br><br>
-        
-        <label for="age">Âge :</label>
-        <input type="text" id="age" name="age"><br><br>
-
+    
+    <form method="post" action="">
+        <label for="name">Nom :</label>
+        <input type="text" id="name" name="name">
+        <br>
         <label for="email">Email :</label>
-        <input type="email" id="email" name="email"><br><br>
-
+        <input type="email" id="email" name="email">
+        <br>
+        <label for="message">Message :</label>
+        <textarea id="message" name="message"></textarea>
+        <br>
         <input type="submit" value="Envoyer">
     </form>
+
+    <?php
+    
+    if (isset($_POST) && !empty($_POST)) {
+        // Commencer le tableau HTML
+        echo "<h2>Résultat :</h2>";
+        echo "<table border='1'>";
+        echo "<thead>";
+        echo "<tr>";
+        echo "<th>Argument</th>";
+        echo "<th>Valeur</th>";
+        echo "</tr>";
+        echo "</thead>";
+        echo "<tbody>";
+
+        
+        foreach ($_POST as $key => $value) {
+            echo "<tr>";
+            echo "<td>" . htmlspecialchars($key) . "</td>"; 
+            echo "<td>" . htmlspecialchars($value) . "</td>"; 
+            echo "</tr>";
+        }
+
+        echo "</tbody>";
+        echo "</table>";
+    } else {
+       
+        echo "<p>Aucune donnée envoyée via le formulaire.</p>";
+    }
+    ?>
 </body>
 </html>
-

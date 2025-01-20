@@ -1,45 +1,65 @@
-<?php
-// Vérification de la soumission du formulaire et récupération des valeurs
-if ($_SERVER['REQUEST_METHOD'] == 'GET' && isset($_GET['largeur']) && isset($_GET['hauteur'])) {
-    // Récupération des valeurs des champs
-    $largeur = $_GET['largeur'];
-    $hauteur = $_GET['hauteur'];
-
-    // Vérification que les valeurs sont numériques et supérieures à 0
-    if (is_numeric($largeur) && is_numeric($hauteur) && $largeur > 0 && $hauteur > 0) {
-        // Dessiner la maison
-        // Toit
-        for ($i = 0; $i < $hauteur; $i++) {
-            echo str_repeat(' ', $hauteur - $i - 1) . str_repeat('*', 2 * $i + 1) . "<br>";
-        }
-        
-        // Corps de la maison (rectangle)
-        for ($i = 0; $i < $largeur; $i++) {
-            echo '*' . str_repeat(' ', 2 * ($hauteur - 1) - 2) . '*' . "<br>";
-        }
-    } else {
-        echo "Veuillez entrer des valeurs valides pour la largeur et la hauteur.";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire Maison</title>
+    <title>Générateur de MA Maison</title>
 </head>
 <body>
-    <h1>Formulaire de Maison</h1>
-    <form action="" method="GET">
+    <h1>MA Maison</h1>
+    <form method="post">
         <label for="largeur">Largeur :</label>
-        <input type="text" id="largeur" name="largeur" required><br><br>
-        
+        <input type="number" id="largeur" name="largeur" min="3" required>
+        <br>
         <label for="hauteur">Hauteur :</label>
-        <input type="text" id="hauteur" name="hauteur" required><br><br>
-
-        <input type="submit" value="Dessiner la Maison">
+        <input type="number" id="hauteur" name="hauteur" min="2" required>
+        <br>
+        <button type="submit">Générer</button>
     </form>
+
+    <?php
+    if (isset($_POST['largeur']) && isset($_POST['hauteur'])) {
+        $largeur = (int)$_POST['largeur'];
+        $hauteur = (int)$_POST['hauteur'];
+
+        // Validation des dimensions
+        if ($largeur < 3 || $hauteur < 2) {
+            echo "<p>La largeur doit être >= 3 et la hauteur >= 2.</p>";
+        } else {
+            echo "<pre>";
+
+            // Générer le toit
+            for ($i = 0; $i < $largeur; $i++) {
+                for ($j = 0; $j < $largeur * 2 - 1; $j++) {
+                    if ($j >= $largeur - 1 - $i && $j <= $largeur - 1 + $i) {
+                        echo "*";
+                    } else {
+                        echo " ";
+                    }
+                }
+                echo "\n";
+            }
+
+            // Générer le corps de la maison
+            for ($i = 0; $i < $hauteur; $i++) {
+                for ($j = 0; $j < $largeur * 2 - 1; $j++) {
+                    if ($j == 0 || $j == $largeur * 2 - 2) {
+                        echo "|";
+                    } else {
+                        echo " ";
+                    }
+                }
+                echo "\n";
+            }
+
+            // Générer le sol de la maison
+            for ($j = 0; $j < $largeur * 2 - 1; $j++) {
+                echo "-";
+            }
+
+            echo "</pre>";
+        }
+    }
+    ?>
 </body>
 </html>
