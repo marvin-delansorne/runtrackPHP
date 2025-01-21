@@ -32,7 +32,7 @@ if (isset($_POST['reset'])){
 </head>
 <body>
 <form method="post">
-    <input type="submit" name="reset" value="Réinitialiser le compteur">
+<button type="submit" name="reset">Réinitialiser le compteur</button>
 </form>
 </body>
 </html>
