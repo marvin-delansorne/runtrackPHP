@@ -1,28 +1,21 @@
-<?php 
+<?php
 
+session_start();
 
-setcookie('visite', '1', time() + (3600), "/") ;
-
-
-
-
-if (!isset($_COOKIE['visite'])) {
-    $visite = 1;
-    setcookie('visite', '1', time() + (3600), "/");
-} else {
-    $visite = $_COOKIE['visite'] + 1;
-    setcookie('visite', $visite, time() + (3600), "/");
+if (!isset($_SESSION['nb_visites'])){
+    $_SESSION['nb_visites'] = 0;
 }
-
-echo "Vous avez visité ce site " . $visite . " fois.";
 
 if (isset($_POST['reset'])){
-    $visite = 0;
-    setcookie('visite', '0', time() + (3600), "/") ;
+    $_SESSION['nb_visites'] = 0 ;
 }
 
+else{
+    $_SESSION['nb_visites'] ++;
+}
 
-?>
+?> 
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -31,9 +24,10 @@ if (isset($_POST['reset'])){
     <title>Document</title>
 </head>
 <body>
-<form method="post">
-    <input type="submit" name="reset" value="Réinitialiser le compteur">
-</form>
+    <h1> Compteur de visite </h1>
+    <p> Nombre de visites : <?php echo $_SESSION['nb_visites'] ; ?> </p>
+    <form method= "post">
+        <button type="submit" name="reset">Réinitialiser le compteur</button>
 </body>
 </html>
 
